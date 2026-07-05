@@ -11,19 +11,19 @@ ficheiro, qual a coluna que serve de 'entity'. Ajusta os nomes dos
 ficheiros / colunas conforme os teus exports reais.
 """
 
-import re
+import reß
 from pathlib import Path
 
 import pandas as pd
 
 # pasta onde estao os CSV das regras (ajusta)
-CSV_DIR = Path("/Users/alezandrio/Desktop/Faculdade/GECAD/Splunk/CSV")
-OUT = CSV_DIR / "analyst_no_DNS.csv"
+CSV_DIR = Path("[YOUR DIR]")
+OUT = CSV_DIR / "[DEST]"
 
 # por regra: ficheiro -> coluna que identifica a entidade.
 # todas ja trazem _time, risk_score e rule_name dos teus eval finais.
 RULES = {
-    #"DNS_Query_Length_With_High_Standard_Deviation_attack.csv":            "entity",
+    "DNS_Query_Length_With_High_Standard_Deviation_attack.csv":            "entity",
     "HTTP_Scripting_Tool_User_Agent.csv":                           "entity",
     "Protocols_Passing_Authentication_In_Cleartext.csv":            "entity",
     "Windows_AD_Privileged_Group_Modification.csv":                 "entity",
@@ -46,7 +46,6 @@ def entity_type(e: str) -> str:
 
 
 def clean_entity(val) -> str:
-    # apanha "service3\n-" -> "service3"; remove dominio se quiseres uniformizar
     return str(val).split("\n")[0].strip().strip('"')
 
 
